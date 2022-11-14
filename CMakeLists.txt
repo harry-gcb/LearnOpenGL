@@ -4,7 +4,6 @@ project(learnopengl C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_BUILD_TYPE Debug)
-set(GLAD_SOURCE_DIR $ENV{HOME}/Workspace/3rdparty/glad/src/)
 if (APPLE)
     set(AppLib
         "-framework CoreFoundation"
@@ -14,10 +13,10 @@ if (APPLE)
 endif()
 
 include_directories(${CMAKE_SOURCE_DIR}/include)
-include_directories($ENV{HOME}/Workspace/3rdparty/glad/include)
-include_directories($ENV{HOME}/Workspace/3rdparty/glfw/include)
-
-link_directories($ENV{HOME}/Workspace/3rdparty/glfw/lib)
+include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include)
+include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include)
+set(GLAD_SOURCE_DIR $ENV{LIB_3RDPARTY_PATH}/glad/src/)
+link_directories($ENV{LIB_3RDPARTY_PATH}/glfw/lib)
 
 add_subdirectory(cmake)
 
