@@ -1,6 +1,6 @@
 
 add_executable(hellowindow
-${GLAD_SOURCE_DIR}glad.c 
+${GLAD_SOURCE_DIR}/glad.c
 ${CMAKE_SOURCE_DIR}/src/hellowindow.cpp)
 
 if (APPLE) 
