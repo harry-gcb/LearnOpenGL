@@ -12,18 +12,5 @@ if (APPLE)
         "-framework AppKit")
 endif()
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
-# glfw
-include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include)
-link_directories($ENV{LIB_3RDPARTY_PATH}/glfw/lib)
-
-# glad
-include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include)
-set(GLAD_SOURCE_DIR $ENV{LIB_3RDPARTY_PATH}/glad/src)
-
-# glew
-include_directories($ENV{LIB_3RDPARTY_PATH}/glew/include)
-link_directories($ENV{LIB_3RDPARTY_PATH}/glew/lib)
-
 add_subdirectory(cmake)
 

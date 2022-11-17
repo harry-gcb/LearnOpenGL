@@ -2,12 +2,49 @@
 #include "GLFW/glfw3.h"
 
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 const unsigned int SRC_WIDTH  = 800;
 const unsigned int SRC_HEIGHT = 600;
 
 void processInput(GLFWwindow *window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
+struct ShaderProgramSource {
+    std::string vertexSource;
+    std::string fragmentSource;
+};
+
+static ShaderProgramSource ParseShader(const std::string &filepath) {
+    std::ifstream stream(filepath);
+
+    enum class ShaderType {
+        NONE = -1,
+        VERTEX = 0,
+        FRAGMENT = 1,
+    };
+
+    std::string line;
+    std::stringstream ss[2];
+    ShaderType type = ShaderType::NONE;
+    while (std::getline(stream, line)) {
+        if (line.find("#shader") != std::string::npos) {
+            if (line.find("vertex") != std::string::npos) {
+                // set mode to vertex shader
+                type = ShaderType::VERTEX;
+            } else if (line.find("fragment") != std::string::npos) {
+                // set mode to fragment shader
+                type = ShaderType::FRAGMENT;
+            } else {
+            }
+        } else {
+            ss[(int)type] << line << "\n";
+        }
+    }
+    return {ss[0].str(), ss[1].str()};
+}
 
 static unsigned int CompileShader(const std::string &source, unsigned int type) {
     unsigned int id = glCreateShader(type);
@@ -40,6 +77,17 @@ static unsigned int CreateShader(const std::string &vertexShader, const std::str
     glAttachShader(program, vs);
     glAttachShader(program, fs);
     glLinkProgram(program);
+
+    int result;
+    glGetProgramiv(program, GL_LINK_STATUS, &result);
+    if (!result) {
+        int length;
+        glGetShaderiv(program, GL_INFO_LOG_LENGTH, &length);
+        char *message = (char *)alloca(length * sizeof(char));
+        glGetProgramInfoLog(program, length, &length, message);
+        std::cout << "ERROR::LINK failed" << message << std::endl;
+    }
+
     glValidateProgram(program);
 
     glDeleteShader(vs);
@@ -69,7 +117,13 @@ int main(int argc, char *argv[]) {
     float vertices[] = {
         -0.5f, -0.5f, 0.0f, // left
          0.5f, -0.5f, 0.0f, // right
-         0.0f,  0.5f, 0.0f // top
+         0.5f,  0.5f, 0.0f, // top
+        -0.5f,  0.5f, 0.0f,
+    };
+
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 3, 0, 
     };
 
     unsigned int VBO;
@@ -80,25 +134,10 @@ int main(int argc, char *argv[]) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (const void *)0);
     glEnableVertexAttribArray(0);
 
-    std::string vertexShader = 
-        "#version 330 core\n"
-        "\n"
-        "layout (location=0) in vec3 position;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-        "}\n";
-    std::string fragmentShader = 
-        "#version 330 core\n"
-        "\n"
-        "out vec4 FragColor;\n"
-        "\n"
-        "void main()\n"
-        "{\n"
-        "   FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
-        "}\n";
-    unsigned int shader = CreateShader(vertexShader, fragmentShader);
+    ShaderProgramSource source = ParseShader("res/shaders/basic/basic.shader");
+    std::cout << source.vertexSource << std::endl;
+    std::cout << source.fragmentSource << std::endl;
+    unsigned int shader = CreateShader(source.vertexSource, source.fragmentSource);
     glUseProgram(shader);
 
     while (!glfwWindowShouldClose(window)) {
@@ -108,7 +147,7 @@ int main(int argc, char *argv[]) {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

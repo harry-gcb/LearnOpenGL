@@ -1,5 +1,10 @@
+
+# glew
+include_directories($ENV{LIB_3RDPARTY_PATH}/glew/include)
+link_directories($ENV{LIB_3RDPARTY_PATH}/glew/lib)
+
 add_executable(hello_window_glew
-${CMAKE_SOURCE_DIR}/src/hello_window_glew.cpp)
+${CMAKE_SOURCE_DIR}/test/hello_window_glew.cpp)
 
 if (APPLE) 
     target_link_libraries(hello_window_glew ${AppLib})
