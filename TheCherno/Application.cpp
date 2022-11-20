@@ -119,6 +119,8 @@ int main(int argc, char *argv[]) {
          0.5f, -0.5f, 0.0f, // right
          0.5f,  0.5f, 0.0f, // top
         -0.5f,  0.5f, 0.0f,
+        //-0.5f, -0.5f, 0.0f,
+        // 0.5f,  0.5f, 0.0f,
     };
 
     unsigned int indices[] = {
@@ -134,6 +136,11 @@ int main(int argc, char *argv[]) {
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (const void *)0);
     glEnableVertexAttribArray(0);
 
+    unsigned int EBO;
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
     ShaderProgramSource source = ParseShader("res/shaders/basic/basic.shader");
     std::cout << source.vertexSource << std::endl;
     std::cout << source.fragmentSource << std::endl;
@@ -147,7 +154,8 @@ int main(int argc, char *argv[]) {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        // glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
