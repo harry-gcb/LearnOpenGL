@@ -1,5 +1,8 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "Renderer.h"
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 #include <iostream>
 #include <fstream>
@@ -11,6 +14,7 @@ const unsigned int SRC_HEIGHT = 600;
 
 void processInput(GLFWwindow *window);
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+
 
 struct ShaderProgramSource {
     std::string vertexSource;
@@ -99,6 +103,12 @@ static unsigned int CreateShader(const std::string &vertexShader, const std::str
 int main(int argc, char *argv[]) {
     glfwInit();
 
+#if 1
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+#endif
+
     GLFWwindow *window = glfwCreateWindow(SRC_WIDTH, SRC_HEIGHT, "learnopengl", nullptr, nullptr);
     if (nullptr == window) {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -108,6 +118,7 @@ int main(int argc, char *argv[]) {
 
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSwapInterval(1);
 
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -128,24 +139,47 @@ int main(int argc, char *argv[]) {
         2, 3, 0, 
     };
 
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    unsigned int VAO;
+    GLCall(glGenVertexArrays(1, &VAO));
+    GLCall(glBindVertexArray(VAO));
+
+    // unsigned int VBO;
+    // glGenBuffers(1, &VBO);
+    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    VertexBuffer VBO(vertices, sizeof(vertices));
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (const void *)0);
     glEnableVertexAttribArray(0);
 
-    unsigned int EBO;
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+
+
+    // unsigned int EBO;
+    // glGenBuffers(1, &EBO);
+    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+    IndexBuffer IBO(indices, 6);
 
     ShaderProgramSource source = ParseShader("res/shaders/basic/basic.shader");
     std::cout << source.vertexSource << std::endl;
     std::cout << source.fragmentSource << std::endl;
     unsigned int shader = CreateShader(source.vertexSource, source.fragmentSource);
     glUseProgram(shader);
+
+    unsigned int location = glGetUniformLocation(shader, "u_Color");
+    ASSERT(location != -1);
+    GLCall(glUniform4f(location, 0.8f, 0.3f, 0.8f, 1.0f));
+
+    glBindVertexArray(0);
+    GLCall(glBindBuffer(GL_ARRAY_BUFFER, 0));
+    GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0));
+    GLCall(glUseProgram(0));
+
+    float r = 0.0f;
+    float increment = 0.05f;
 
     while (!glfwWindowShouldClose(window)) {
 
@@ -154,8 +188,26 @@ int main(int argc, char *argv[]) {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        GLCall(glBindVertexArray(VAO));
+        // GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+        // GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
+        GLCall(glUseProgram(shader));
+
+        VBO.Bind();
+        IBO.Bind();
+
+        // GLClearError();
         // glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
+        GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
+        // ASSERT(GLLogCall());
+        if (r > 1.0f) {
+            increment = -0.05f;
+        }
+        else if (r < 0.0f) {
+            increment = 0.05f;
+        }
+        r += increment;
 
         glfwSwapBuffers(window);
         glfwPollEvents();

@@ -5,7 +5,7 @@ aux_source_directory(${GLAD_SOURCE_DIR} SOURCE_LIST)
 aux_source_directory(${CMAKE_SOURCE_DIR}/TheCherno SOURCE_LIST)
 
 # header
-include_directories(${CMAKE_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/TheCherno)
 include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include) # glad
 include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include) # glfw
 
