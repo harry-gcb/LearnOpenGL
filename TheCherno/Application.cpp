@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
+#include "VertexArray.h"
 
 #include <iostream>
 #include <fstream>
@@ -139,27 +140,13 @@ int main(int argc, char *argv[]) {
         2, 3, 0, 
     };
 
-    unsigned int VAO;
-    GLCall(glGenVertexArrays(1, &VAO));
-    GLCall(glBindVertexArray(VAO));
-
-    // unsigned int VBO;
-    // glGenBuffers(1, &VBO);
-    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
+    
     VertexBuffer VBO(vertices, sizeof(vertices));
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (const void *)0);
-    glEnableVertexAttribArray(0);
-
-
-
-
-    // unsigned int EBO;
-    // glGenBuffers(1, &EBO);
-    // glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    // glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    VertexArray VAO;
+    VertexBufferLayout layout;
+    layout.Push<float>(3);
+    VAO.AddBuffer(VBO, layout);
 
     IndexBuffer IBO(indices, 6);
 
@@ -188,16 +175,13 @@ int main(int argc, char *argv[]) {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        GLCall(glBindVertexArray(VAO));
-        // GLCall(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-        // GLCall(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
+
         GLCall(glUseProgram(shader));
 
+        VAO.Bind();
         VBO.Bind();
         IBO.Bind();
 
-        // GLClearError();
-        // glDrawArrays(GL_TRIANGLES, 0, 6);
         GLCall(glUniform4f(location, r, 0.3f, 0.8f, 1.0f));
         GLCall(glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr));
         // ASSERT(GLLogCall());
