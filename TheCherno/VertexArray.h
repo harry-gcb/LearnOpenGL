@@ -2,8 +2,8 @@
 #define THECHERNO_OPENGL_VERTEXARRA_H_
 
 #include "VertexBuffer.h"
-#include "VretexBufferLayout.h"
 
+class VertexBufferLayout;
 class VertexArray {
 public:
     VertexArray();

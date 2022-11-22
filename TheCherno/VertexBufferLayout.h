@@ -5,7 +5,6 @@
 #include "glad/glad.h"
 #include "Renderer.h"
 
-
 struct VertexBufferElement {
     unsigned int type;
     unsigned int count;
