@@ -1,6 +1,7 @@
 
 include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include) # glad
 include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include) # glfw
+include_directories($ENV{LIB_3RDPARTY_PATH}/stb) # stb_image
 include_directories(${CMAKE_SOURCE_DIR}/include) # LearnOpenGL
 
 # lib
@@ -74,3 +75,39 @@ add_executable(shaders_class
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/getting_started/shaders_class/shaders_class.cpp)
 target_link_libraries(shaders_class glfw3)
+
+# getting_started/shaders_exercise2
+add_executable(shaders_exercise2
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/shaders_exercise2/shaders_exercise2.cpp)
+target_link_libraries(shaders_exercise2 glfw3)
+
+# getting_started/textures_basic
+add_executable(textures_basic
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/textures_basic/textures_basic.cpp)
+target_link_libraries(textures_basic glfw3)
+
+# getting_started/textures_combined
+add_executable(textures_combined
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/textures_combined/textures_combined.cpp)
+target_link_libraries(textures_combined glfw3)
+
+# getting_started/textures_exercise2
+add_executable(textures_exercise2
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/textures_exercise2/textures_exercise2.cpp)
+target_link_libraries(textures_exercise2 glfw3)
+
+# getting_started/textures_exercise3
+add_executable(textures_exercise3
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/textures_exercise3/textures_exercise3.cpp)
+target_link_libraries(textures_exercise3 glfw3)
+
+# getting_started/textures_exercise4
+add_executable(textures_exercise4
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/textures_exercise4/textures_exercise4.cpp)
+target_link_libraries(textures_exercise4 glfw3)
