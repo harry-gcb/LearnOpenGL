@@ -2,6 +2,7 @@
 include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include) # glad
 include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include) # glfw
 include_directories($ENV{LIB_3RDPARTY_PATH}/stb) # stb_image
+include_directories($ENV{LIB_3RDPARTY_PATH}/glm) # glm
 include_directories(${CMAKE_SOURCE_DIR}/include) # LearnOpenGL
 
 # lib
@@ -111,3 +112,21 @@ add_executable(textures_exercise4
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/getting_started/textures_exercise4/textures_exercise4.cpp)
 target_link_libraries(textures_exercise4 glfw3)
+
+# getting_started/transformations
+add_executable(transformations
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/transformations/transformations.cpp)
+target_link_libraries(transformations glfw3)
+
+# getting_started/transformations_exercise1
+add_executable(transformations_exercise1
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/transformations_exercise1/transformations_exercise1.cpp)
+target_link_libraries(transformations_exercise1 glfw3)
+
+# getting_started/transformations_exercise2
+add_executable(transformations_exercise2
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/transformations_exercise2/transformations_exercise2.cpp)
+target_link_libraries(transformations_exercise2 glfw3)

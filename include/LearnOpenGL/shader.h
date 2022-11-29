@@ -49,6 +49,10 @@ public:
         glUniform1f(glGetUniformLocation(m_ID, name.c_str()), value); 
     }
 
+    void setMat4f(const std::string &name, const float *value) {
+        glUniformMatrix4fv(glGetUniformLocation(m_ID, name.c_str()), 1, GL_FALSE, value);
+    }
+
 private:
     unsigned int createShader(const std::string &shaderPath, const std::string &type) {
         std::string shaderCode;
