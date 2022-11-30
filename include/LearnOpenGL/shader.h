@@ -7,6 +7,7 @@
 #include <iostream>
 
 #include "glad/glad.h"
+#include "glm/glm.hpp"
 
 #define VERTEX_SHADER   "VERTEX"
 #define FRAGMENT_SHADER "FRAGMENT"
@@ -49,8 +50,8 @@ public:
         glUniform1f(glGetUniformLocation(m_ID, name.c_str()), value); 
     }
 
-    void setMat4f(const std::string &name, const float *value) {
-        glUniformMatrix4fv(glGetUniformLocation(m_ID, name.c_str()), 1, GL_FALSE, value);
+    void setMat4(const std::string &name, glm::mat4 &mat) {
+        glUniformMatrix4fv(glGetUniformLocation(m_ID, name.c_str()), 1, GL_FALSE, glm::value_ptr<float>(mat));
     }
 
 private:

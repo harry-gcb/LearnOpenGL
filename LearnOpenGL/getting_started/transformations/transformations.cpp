@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
         // 激活着色器
         shader.use();
         shader.setFloat("mixValue", mixValue);
-        shader.setMat4f("transform", glm::value_ptr(transform));
+        shader.setMat4("transform", transform);
 
         // 绘制三角形
         glBindVertexArray(VAO);

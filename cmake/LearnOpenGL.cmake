@@ -130,3 +130,9 @@ add_executable(transformations_exercise2
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/getting_started/transformations_exercise2/transformations_exercise2.cpp)
 target_link_libraries(transformations_exercise2 glfw3)
+
+# getting_started/coordinate_systems
+add_executable(coordinate_systems
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/coordinate_systems/coordinate_systems.cpp)
+target_link_libraries(coordinate_systems glfw3)
