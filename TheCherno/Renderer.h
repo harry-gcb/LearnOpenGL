@@ -9,7 +9,7 @@
 #include "Shader.h"
 
 
-#define ASSERT(x) if (!(x)) __debugbreak();
+#define ASSERT(x) assert(x);
 #define GLCall(x) GLClearError(); \
         x; \
         ASSERT(GLLogCall(#x, __FILE__, __LINE__))

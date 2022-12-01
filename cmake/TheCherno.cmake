@@ -13,10 +13,5 @@ include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include) # glfw
 link_directories($ENV{LIB_3RDPARTY_PATH}/glfw/lib)
 
 add_executable(TheChernoOpenGL ${SOURCE_LIST})
-
-if (APPLE) 
-    target_link_libraries(TheChernoOpenGL ${AppLib})
-endif()
-
-target_link_libraries(TheChernoOpenGL glfw3)
+target_link_libraries(TheChernoOpenGL ${GL_DEPS})
 

@@ -1,3 +1,7 @@
+if (APPLE)
+    set(GL_DEPS "glfw3 -framework CoreFoundation -framework CoreGraphics -framework IOKit -framework AppKit")
+else()
+    set(GL_DEPS "glfw3")
+endif()
 include(TheCherno.cmake)
 include(LearnOpenGL.cmake)
-include(hello_window_glew.cmake)
