@@ -1,14 +1,13 @@
+set(LEARN_OPENGL_DIR ${CMAKE_SOURCE_DIR}/LearnOpenGL)
 
 include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include) # glad
 include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include) # glfw
 include_directories($ENV{LIB_3RDPARTY_PATH}/stb) # stb_image
 include_directories($ENV{LIB_3RDPARTY_PATH}/glm) # glm
-include_directories(${CMAKE_SOURCE_DIR}/include) # LearnOpenGL
+include_directories(${LEARN_OPENGL_DIR}) # LearnOpenGL
 
 # lib
 link_directories($ENV{LIB_3RDPARTY_PATH}/glfw/lib)
-
-set(LEARN_OPENGL_DIR ${CMAKE_SOURCE_DIR}/LearnOpenGL)
 
 # getting_started/hello_window
 add_executable(hello_window
