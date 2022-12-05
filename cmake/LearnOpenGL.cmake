@@ -134,3 +134,33 @@ add_executable(coordinate_systems
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/getting_started/coordinate_systems/coordinate_systems.cpp)
 target_link_libraries(coordinate_systems ${GL_DEPS})
+
+# getting_started/coordinate_systems_depth
+add_executable(coordinate_systems_depth
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/coordinate_systems_depth/coordinate_systems_depth.cpp)
+target_link_libraries(coordinate_systems_depth ${GL_DEPS})
+
+# getting_started/coordinate_systems_multiple
+add_executable(coordinate_systems_multiple
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/coordinate_systems_multiple/coordinate_systems_multiple.cpp)
+target_link_libraries(coordinate_systems_multiple ${GL_DEPS})
+
+# getting_started/coordinate_systems_exercise1
+add_executable(coordinate_systems_exercise1
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/coordinate_systems_exercise1/coordinate_systems_exercise1.cpp)
+target_link_libraries(coordinate_systems_exercise1 ${GL_DEPS})
+
+# getting_started/coordinate_systems_exercise2
+add_executable(coordinate_systems_exercise2
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/coordinate_systems_exercise2/coordinate_systems_exercise2.cpp)
+target_link_libraries(coordinate_systems_exercise2 ${GL_DEPS})
+
+# getting_started/coordinate_systems_exercise3
+add_executable(coordinate_systems_exercise3
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/coordinate_systems_exercise3/coordinate_systems_exercise3.cpp)
+target_link_libraries(coordinate_systems_exercise3 ${GL_DEPS})

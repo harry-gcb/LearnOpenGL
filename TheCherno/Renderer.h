@@ -1,6 +1,8 @@
 #ifndef THECHERNO_OPENGL_RENDER_H_
 #define THECHERNO_OPENGL_RENDER_H_
 
+#include <assert.h>
+
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 

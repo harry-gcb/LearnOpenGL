@@ -18,6 +18,8 @@ const unsigned int SRC_WIDTH = 800;
 const unsigned int SRC_HEIGHT = 600;
 
 static float mixValue = 0.2f;
+static float xDirect = 0.0f;
+static float yDirect = 0.0f;
 
 int main(int argc, char *argv[]) {
     glfwInit();
@@ -156,8 +158,10 @@ int main(int argc, char *argv[]) {
 
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::rotate(model, glm::radians(-55.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
         glm::mat4 view = glm::mat4(1.0f);
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+        view = glm::translate(view, glm::vec3(xDirect, yDirect, -3.0f));
+
         glm::mat4 projection = glm::mat4(1.0f);
         projection = glm::perspective(glm::radians(45.0f), (float)SRC_WIDTH / (float)SRC_HEIGHT, 0.1f, 100.0f);
 
@@ -189,16 +193,13 @@ void processInput(GLFWwindow *window) {
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        mixValue += 0.005f;
-        if (mixValue >= 1.0f) {
-            mixValue = 1.0f;
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        mixValue -= 0.005f;
-        if (mixValue <= 0.0f) {
-            mixValue = 0.0f;
-        }
+        xDirect += 0.005f;
+    } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        xDirect -= 0.005f;
+    } else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        yDirect -= 0.005f;
+    } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        yDirect += 0.005f;
     }
 }
 

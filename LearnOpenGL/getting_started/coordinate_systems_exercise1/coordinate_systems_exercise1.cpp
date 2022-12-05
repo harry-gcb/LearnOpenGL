@@ -17,7 +17,8 @@ static void processInput(GLFWwindow *window);
 const unsigned int SRC_WIDTH = 800;
 const unsigned int SRC_HEIGHT = 600;
 
-static float mixValue = 0.2f;
+static float FoV = 0.0f;
+static float aspectRatio = 0.0f;
 
 int main(int argc, char *argv[]) {
     glfwInit();
@@ -116,7 +117,7 @@ int main(int argc, char *argv[]) {
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
     // set the texture wrapping paramters
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
     // set texture filtering paramters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -136,7 +137,6 @@ int main(int argc, char *argv[]) {
     // 这里的value是GL_TEXTURE0 + value 所对应的active texture
     shader.setInt("texture0", 0);
     shader.setInt("texture1", 1);
-    shader.setFloat("mixValue", mixValue);
 
     while (!glfwWindowShouldClose(window)) {
         // 输入
@@ -159,7 +159,7 @@ int main(int argc, char *argv[]) {
         glm::mat4 view = glm::mat4(1.0f);
         view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
         glm::mat4 projection = glm::mat4(1.0f);
-        projection = glm::perspective(glm::radians(45.0f), (float)SRC_WIDTH / (float)SRC_HEIGHT, 0.1f, 100.0f);
+        projection = glm::perspective(glm::radians(FoV), aspectRatio, 0.1f, 100.0f);
 
         // 激活着色器
         shader.use();
@@ -174,6 +174,8 @@ int main(int argc, char *argv[]) {
         // 交换缓冲并查询IO事件
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        std::cout << "Fov: " << FoV << ", aspectRatio: " << aspectRatio << std::endl;
     }
 
     glDeleteVertexArrays(1, &VAO);
@@ -189,16 +191,13 @@ void processInput(GLFWwindow *window) {
         glfwSetWindowShouldClose(window, true);
     }
     if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) {
-        mixValue += 0.005f;
-        if (mixValue >= 1.0f) {
-            mixValue = 1.0f;
-        }
-    }
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
-        mixValue -= 0.005f;
-        if (mixValue <= 0.0f) {
-            mixValue = 0.0f;
-        }
+        FoV += 1.0f;
+    } else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS) {
+        FoV -= 1.0f;
+    } else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+        aspectRatio -= 0.01f;
+    } else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+        aspectRatio += 0.01f;
     }
 }
 
