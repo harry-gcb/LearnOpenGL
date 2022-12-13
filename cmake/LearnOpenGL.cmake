@@ -164,3 +164,51 @@ add_executable(coordinate_systems_exercise3
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/getting_started/coordinate_systems_exercise3/coordinate_systems_exercise3.cpp)
 target_link_libraries(coordinate_systems_exercise3 ${GL_DEPS})
+
+# getting_started/camera
+add_executable(camera
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera/camera.cpp)
+target_link_libraries(camera ${GL_DEPS})
+
+# getting_started/camera_keyboard
+add_executable(camera_keyboard
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_keyboard/camera_keyboard.cpp)
+target_link_libraries(camera_keyboard ${GL_DEPS})
+
+# getting_started/camera_keyboard_dt
+add_executable(camera_keyboard_dt
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_keyboard_dt/camera_keyboard_dt.cpp)
+target_link_libraries(camera_keyboard_dt ${GL_DEPS})
+
+# getting_started/camera_mouse
+add_executable(camera_mouse
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_mouse/camera_mouse.cpp)
+target_link_libraries(camera_mouse ${GL_DEPS})
+
+# getting_started/camera_zoom
+add_executable(camera_zoom
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_zoom/camera_zoom.cpp)
+target_link_libraries(camera_zoom ${GL_DEPS})
+
+# getting_started/camera_class
+add_executable(camera_class
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_class/camera_class.cpp)
+target_link_libraries(camera_class ${GL_DEPS})
+
+# getting_started/camera_exercise1
+add_executable(camera_exercise1
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_exercise1/camera_exercise1.cpp)
+target_link_libraries(camera_exercise1 ${GL_DEPS})
+
+# getting_started/camera_exercise2
+add_executable(camera_exercise2
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/getting_started/camera_exercise2/camera_exercise2.cpp)
+target_link_libraries(camera_exercise2 ${GL_DEPS})
