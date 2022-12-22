@@ -14,9 +14,14 @@ aux_source_directory(${GAMES101_DIR}/Transformation Transformation)
 add_executable(Transformation ${Transformation})
 target_link_libraries(Transformation)
 
-# Assignment
-aux_source_directory(${GAMES101_DIR}/Assignment Assignment)
-add_executable(Assignment ${Assignment})
-target_link_libraries(Assignment opencv_world460d)
+# Assignment1
+aux_source_directory(${GAMES101_DIR}/Assignment1 Assignment1)
+add_executable(Assignment1 ${Assignment1})
+target_link_libraries(Assignment1 opencv_world460d)
+
+# Assignment2
+aux_source_directory(${GAMES101_DIR}/Assignment2 Assignment2)
+add_executable(Assignment2 ${Assignment2})
+target_link_libraries(Assignment2 opencv_world460d)
 
 
