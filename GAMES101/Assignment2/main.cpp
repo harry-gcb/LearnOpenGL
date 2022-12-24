@@ -30,16 +30,19 @@ Eigen::Matrix4f get_model_matrix(float rotation_angle)
 
 Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float zNear, float zFar)
 {
-    // TODO: Copy-paste your implementation from the previous assignment.
+    // Copy-paste your implementation from the previous assignment.
     Eigen::Matrix4f projection = Eigen::Matrix4f::Identity();
 
+    zNear *= -1;
+    zFar *= -1;
+
     Eigen::Matrix4f persp;
-    persp << -zNear, 0.0f, 0.0f, 0.0f,
-             0.0f, -zNear, 0.0f, 0.0f,
-             0.0f, 0.0f, -zNear - zFar, -1 * zNear * zFar,
+    persp << zNear, 0.0f, 0.0f, 0.0f,
+             0.0f, zNear, 0.0f, 0.0f,
+             0.0f, 0.0f, zNear + zFar, -1 * zNear * zFar,
              0.0f, 0.0f,  1.0f, 0.0f;
     float half_eye_fov = eye_fov / 2 / 180.0f * MY_PI;
-    float top = -zNear * std::tan(half_eye_fov);
+    float top = std::abs(zNear) * std::tan(half_eye_fov);
     float left = top * aspect_ratio;
     float bottom = -1 * top;
     float right = -1 * left;
@@ -47,13 +50,13 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     Eigen::Matrix4f ortho_trans;
     ortho_trans << 1.0f, 0.0f, 0.0f, -1 * (left + right) / 2.0f,
                    0.0f, 1.0f, 0.0f, -1 * (top + bottom) / 2.0f,
-                   0.0f, 0.0f, 1.0f, -1 * (-zNear - zFar) / 2.0f,
+                   0.0f, 0.0f, 1.0f, -1 * (zNear + zFar) / 2.0f,
                    0.0f, 0.0f, 0.0f, 1.0f;
     
     Eigen::Matrix4f ortho_scale;
     ortho_scale << 2 / (left - right), 0.0f, 0.0f, 0.0f,
                    0.0f, 2 / (top - bottom), 0.0f, 0.0f,
-                   0.0f, 0.0f, 2 / (-zFar + zNear), 0.0f,
+                   0.0f, 0.0f, 2 / (zFar - zNear), 0.0f,
                    0.0f, 0.0f, 0.0f, 1.0f;
 
     projection = ortho_scale * ortho_trans * persp * projection;

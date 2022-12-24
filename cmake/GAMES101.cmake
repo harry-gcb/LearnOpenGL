@@ -24,4 +24,10 @@ aux_source_directory(${GAMES101_DIR}/Assignment2 Assignment2)
 add_executable(Assignment2 ${Assignment2})
 target_link_libraries(Assignment2 opencv_world460d)
 
+# Assignment3
+aux_source_directory(${GAMES101_DIR}/Assignment3 Assignment3)
+add_executable(Assignment3 ${Assignment3})
+target_link_libraries(Assignment3 opencv_world460d)
+
+
 
