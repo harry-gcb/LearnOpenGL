@@ -212,3 +212,51 @@ add_executable(camera_exercise2
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/getting_started/camera_exercise2/camera_exercise2.cpp)
 target_link_libraries(camera_exercise2 ${GL_DEPS})
+
+# lighting/lighting_colors
+add_executable(lighting_colors
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_colors/lighting_colors.cpp)
+target_link_libraries(lighting_colors ${GL_DEPS})
+
+# lighting/lighting_basic
+add_executable(lighting_basic
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_basic/lighting_basic.cpp)
+target_link_libraries(lighting_basic ${GL_DEPS})
+
+# lighting/lighting_basic_exercise1
+add_executable(lighting_basic_exercise1
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_basic_exercise1/lighting_basic_exercise1.cpp)
+target_link_libraries(lighting_basic_exercise1 ${GL_DEPS})
+
+# lighting/lighting_materials
+add_executable(lighting_materials
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_materials/lighting_materials.cpp)
+target_link_libraries(lighting_materials ${GL_DEPS})
+
+# lighting/lighting_materials_exercise2
+add_executable(lighting_materials_exercise2
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_materials_exercise2/lighting_materials_exercise2.cpp)
+target_link_libraries(lighting_materials_exercise2 ${GL_DEPS})
+
+# lighting/lighting_maps
+add_executable(lighting_maps
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_maps/lighting_maps.cpp)
+target_link_libraries(lighting_maps ${GL_DEPS})
+
+# lighting/lighting_maps_exercise3
+add_executable(lighting_maps_exercise3
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_maps_exercise3/lighting_maps_exercise3.cpp)
+target_link_libraries(lighting_maps_exercise3 ${GL_DEPS})
+
+# lighting/lighting_maps_exercise4
+add_executable(lighting_maps_exercise4
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_maps_exercise4/lighting_maps_exercise4.cpp)
+target_link_libraries(lighting_maps_exercise4 ${GL_DEPS})

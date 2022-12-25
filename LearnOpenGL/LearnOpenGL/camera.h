@@ -50,6 +50,9 @@ public:
     float GetFov() {
         return m_zoom;
     }
+    glm::vec3 GetViewPos() const {
+        return m_position;
+    }
 
     void ProcessKeyboard(Camera_Movement direction, float deltaTime) {
         float velocity = m_speed * deltaTime;

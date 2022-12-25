@@ -51,9 +51,20 @@ public:
         glUniform1f(glGetUniformLocation(m_ID, name.c_str()), value); 
     }
 
-    void setMat4(const std::string &name, glm::mat4 &mat) {
+    void setMat4(const std::string &name, const glm::mat4 &mat) {
         glUniformMatrix4fv(glGetUniformLocation(m_ID, name.c_str()), 1, GL_FALSE, glm::value_ptr<float>(mat));
     }
+
+    void setVec3(const std::string &name, float x, float y, float z) const
+    { 
+        glUniform3f(glGetUniformLocation(m_ID, name.c_str()), x, y, z); 
+    }
+
+    void setVec3(const std::string &name, const glm::vec3 &vec) const
+    { 
+        glUniform3fv(glGetUniformLocation(m_ID, name.c_str()), 1, glm::value_ptr<float>(vec)); 
+    }
+
 
 private:
     unsigned int createShader(const std::string &shaderPath, const std::string &type) {
