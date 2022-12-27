@@ -260,3 +260,33 @@ add_executable(lighting_maps_exercise4
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/lighting/lighting_maps_exercise4/lighting_maps_exercise4.cpp)
 target_link_libraries(lighting_maps_exercise4 ${GL_DEPS})
+
+# lighting/lighting_casters_directional
+add_executable(lighting_casters_directional
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_casters_directional/lighting_casters_directional.cpp)
+target_link_libraries(lighting_casters_directional ${GL_DEPS})
+
+# lighting/lighting_casters_point
+add_executable(lighting_casters_point
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_casters_point/lighting_casters_point.cpp)
+target_link_libraries(lighting_casters_point ${GL_DEPS})
+
+# lighting/lighting_casters_spot
+add_executable(lighting_casters_spot
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_casters_spot/lighting_casters_spot.cpp)
+target_link_libraries(lighting_casters_spot ${GL_DEPS})
+
+# lighting/lighting_casters_spot_soft
+add_executable(lighting_casters_spot_soft
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_casters_spot_soft/lighting_casters_spot_soft.cpp)
+target_link_libraries(lighting_casters_spot_soft ${GL_DEPS})
+
+# lighting/lighting_mulitple
+add_executable(lighting_multiple
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/lighting/lighting_multiple/lighting_multiple.cpp)
+target_link_libraries(lighting_multiple ${GL_DEPS})

@@ -50,8 +50,11 @@ public:
     float GetFov() {
         return m_zoom;
     }
-    glm::vec3 GetViewPos() const {
+    glm::vec3 GetPosition() const {
         return m_position;
+    }
+    glm::vec3 GetFront() const {
+        return m_front;
     }
 
     void ProcessKeyboard(Camera_Movement direction, float deltaTime) {

@@ -187,7 +187,7 @@ int main(int argc, char *argv[]) {
         lightingShader.setFloat("material.shininess", 64.0f);
 
 
-        lightingShader.setVec3("viewPos", camera.GetViewPos());
+        lightingShader.setVec3("viewPos", camera.GetPosition());
         lightingShader.setVec3("light.position", lightPos);
     
         lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
