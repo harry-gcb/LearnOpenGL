@@ -2,12 +2,14 @@ set(LEARN_OPENGL_DIR ${CMAKE_SOURCE_DIR}/LearnOpenGL)
 
 include_directories($ENV{LIB_3RDPARTY_PATH}/glad/include) # glad
 include_directories($ENV{LIB_3RDPARTY_PATH}/glfw/include) # glfw
+include_directories($ENV{LIB_3RDPARTY_PATH}/assimp/include) # glfw
 include_directories($ENV{LIB_3RDPARTY_PATH}/stb) # stb_image
 include_directories($ENV{LIB_3RDPARTY_PATH}/glm) # glm
 include_directories(${LEARN_OPENGL_DIR}) # LearnOpenGL
 
 # lib
 link_directories($ENV{LIB_3RDPARTY_PATH}/glfw/lib)
+link_directories($ENV{LIB_3RDPARTY_PATH}/assimp/lib)
 
 # getting_started/hello_window
 add_executable(hello_window
@@ -290,3 +292,27 @@ add_executable(lighting_multiple
 ${GLAD_SOURCE_DIR}/glad.c
 ${LEARN_OPENGL_DIR}/lighting/lighting_multiple/lighting_multiple.cpp)
 target_link_libraries(lighting_multiple ${GL_DEPS})
+
+# model_loading
+add_executable(model_loading
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/model_loading/model_loading.cpp)
+target_link_libraries(model_loading ${GL_DEPS})
+
+# advanced_opengl/depth_testing
+add_executable(depth_testing
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/advanced_opengl/depth_testing/depth_testing.cpp)
+target_link_libraries(depth_testing ${GL_DEPS})
+
+# advanced_opengl/depth_testing_view
+add_executable(depth_testing_view
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/advanced_opengl/depth_testing_view/depth_testing_view.cpp)
+target_link_libraries(depth_testing_view ${GL_DEPS})
+
+# advanced_opengl/stencil_testing
+add_executable(stencil_testing
+${GLAD_SOURCE_DIR}/glad.c
+${LEARN_OPENGL_DIR}/advanced_opengl/stencil_testing/stencil_testing.cpp)
+target_link_libraries(stencil_testing ${GL_DEPS})
